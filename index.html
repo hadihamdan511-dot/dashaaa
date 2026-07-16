@@ -1,814 +1,705 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>My Love — Our Story 💗</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy 18th — My Love 💗</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    :root {
+      --dark: #0a0608;
+      --dark2: #120d10;
+      --pink: #f4a7c3;
+      --pink-deep: #e07fa8;
+      --pink-light: #fce4ef;
+      --gold: #d4af7a;
+      --white: #fdf6f9;
+      --gray: #888;
+    }
 
-        :root {
-            --pink: #f5a0b5;
-            --pink-dark: #d4738a;
-            --pink-glow: #fcc8d6;
-            --pink-soft: #ffe0e8;
-            --gold: #d4af37;
-            --gold-soft: #e8d5a3;
-            --dark: #0d0b0c;
-            --soft-white: #f5f0ed;
-            --rose: #f7d4d9;
-        }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--dark); color: var(--white); overflow-x: hidden; cursor: none; }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    /* CUSTOM CURSOR */
+    .cursor {
+      position: fixed; width: 20px; height: 20px;
+      pointer-events: none; z-index: 99999;
+      font-size: 16px; transform: translate(-50%, -50%);
+      transition: transform 0.1s ease;
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--dark);
-            color: var(--soft-white);
-            overflow-x: hidden;
-        }
+    ::-webkit-scrollbar { width: 2px; }
+    ::-webkit-scrollbar-track { background: var(--dark); }
+    ::-webkit-scrollbar-thumb { background: var(--pink); }
 
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--dark);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--pink);
-            border-radius: 20px;
-        }
+    /* HEARTS */
+    .hearts-container { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .heart { position: absolute; bottom: -50px; opacity: 0; animation: floatHeart linear infinite; }
+    @keyframes floatHeart {
+      0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.7; }
+      50% { opacity: 0.4; }
+      100% { transform: translateY(-110vh) rotate(25deg) scale(0.5); opacity: 0; }
+    }
 
-        /* ─── FLOATING HEARTS ─── */
-        .hearts-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
+    /* CINEMATIC BARS */
+    .bar-top, .bar-bottom { position: fixed; left: 0; right: 0; height: 55px; background: #000; z-index: 100; }
+    .bar-top { top: 0; }
+    .bar-bottom { bottom: 0; }
 
-        .heart {
-            position: absolute;
-            font-size: 20px;
-            color: var(--pink);
-            opacity: 0.15;
-            animation: floatHeart 15s infinite linear;
-        }
+    /* MUSIC PLAYER */
+    .music-player {
+      position: fixed; bottom: 70px; right: 20px; z-index: 200;
+      background: rgba(10,6,8,0.9); border: 1px solid rgba(244,167,195,0.2);
+      border-radius: 50px; padding: 10px 18px;
+      display: flex; align-items: center; gap: 12px;
+      backdrop-filter: blur(10px);
+    }
+    .music-info { display: flex; flex-direction: column; }
+    .music-title { font-size: 10px; letter-spacing: 2px; color: var(--pink); }
+    .music-artist { font-size: 9px; color: var(--gray); letter-spacing: 1px; }
+    .music-btn {
+      background: none; border: none; cursor: pointer;
+      color: var(--pink); font-size: 18px; padding: 0;
+      transition: transform 0.3s;
+    }
+    .music-btn:hover { transform: scale(1.2); }
+    .music-wave { display: flex; gap: 2px; align-items: center; }
+    .music-wave span {
+      display: block; width: 2px; background: var(--pink);
+      border-radius: 2px; animation: wave 0.8s ease-in-out infinite;
+    }
+    .music-wave span:nth-child(1) { height: 8px; animation-delay: 0s; }
+    .music-wave span:nth-child(2) { height: 14px; animation-delay: 0.1s; }
+    .music-wave span:nth-child(3) { height: 10px; animation-delay: 0.2s; }
+    .music-wave span:nth-child(4) { height: 16px; animation-delay: 0.15s; }
+    .music-wave span:nth-child(5) { height: 8px; animation-delay: 0.05s; }
+    .music-wave.paused span { animation-play-state: paused; }
+    @keyframes wave {
+      0%, 100% { transform: scaleY(1); }
+      50% { transform: scaleY(0.4); }
+    }
 
-        @keyframes floatHeart {
-            0% { transform: translateY(100vh) rotate(0deg) scale(0.5); opacity: 0; }
-            10% { opacity: 0.15; }
-            90% { opacity: 0.15; }
-            100% { transform: translateY(-10vh) rotate(720deg) scale(1.2); opacity: 0; }
-        }
+    /* NAV */
+    .story-nav {
+      position: fixed; top: 55px; left: 0; right: 0; z-index: 99;
+      display: flex; justify-content: center; padding: 12px 20px;
+      gap: 5px; flex-wrap: wrap;
+      background: linear-gradient(rgba(10,6,8,0.95), transparent);
+    }
+    .story-nav a {
+      font-size: 9px; letter-spacing: 2px; color: rgba(244,167,195,0.5);
+      text-decoration: none; padding: 5px 12px;
+      border: 1px solid rgba(244,167,195,0.1);
+      border-radius: 20px; transition: all 0.3s;
+      white-space: nowrap;
+    }
+    .story-nav a:hover, .story-nav a.active {
+      color: var(--pink); border-color: rgba(244,167,195,0.4);
+      background: rgba(244,167,195,0.05);
+    }
 
-        /* ─── CINEMATIC LETTERBOX ─── */
-        .cinematic {
-            position: fixed;
-            left: 0;
-            right: 0;
-            height: 6vh;
-            background: var(--dark);
-            z-index: 999;
-            pointer-events: none;
-        }
-        .cinematic-top { top: 0; }
-        .cinematic-bottom { bottom: 0; }
+    /* COUNTDOWN BAR — only days together */
+    .countdown-bar {
+      position: fixed; top: 55px; left: 0; right: 0; z-index: 98;
+      text-align: center; padding: 6px;
+      background: rgba(244,167,195,0.06);
+      border-bottom: 1px solid rgba(244,167,195,0.1);
+      font-size: 10px; letter-spacing: 3px; color: var(--gold);
+    }
 
-        /* ─── SECTIONS ─── */
-        .section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 80px 30px;
-            position: relative;
-            z-index: 1;
-            opacity: 0;
-            transform: translateY(40px);
-            animation: fadeUp 1s ease forwards;
-        }
+    /* SECTIONS */
+    section { position: relative; z-index: 1; }
 
-        .section:nth-child(1) { animation-delay: 0.2s; }
-        .section:nth-child(2) { animation-delay: 0.4s; }
-        .section:nth-child(3) { animation-delay: 0.6s; }
-        .section:nth-child(4) { animation-delay: 0.8s; }
-        .section:nth-child(5) { animation-delay: 1.0s; }
-        .section:nth-child(6) { animation-delay: 1.2s; }
-        .section:nth-child(7) { animation-delay: 1.4s; }
-        .section:nth-child(8) { animation-delay: 1.6s; }
-        .section:nth-child(9) { animation-delay: 1.8s; }
-        .section:nth-child(10) { animation-delay: 2.0s; }
+    /* HERO */
+    .hero {
+      height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      position: relative; overflow: hidden; text-align: center; padding: 60px 20px;
+    }
+    .hero-bg { position: absolute; inset: 0; }
+    .hero-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.3; filter: blur(1px); }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(10,6,8,0.2) 0%, rgba(10,6,8,0.85) 100%);
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-date { font-size: 11px; letter-spacing: 6px; color: var(--gold); margin-bottom: 30px; opacity: 0; animation: fadeUp 1.2s ease forwards 0.3s; }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(60px, 13vw, 140px); font-weight: 900;
+      color: var(--pink);
+      text-shadow: 0 0 40px rgba(244,167,195,0.5), 0 0 80px rgba(244,167,195,0.25), 0 0 160px rgba(244,167,195,0.1);
+      line-height: 1; margin-bottom: 25px;
+      opacity: 0; animation: fadeUp 1.2s ease forwards 0.6s;
+    }
+    .hero-sub { font-size: 16px; letter-spacing: 5px; color: var(--gold); margin-bottom: 20px; opacity: 0; animation: fadeUp 1.2s ease forwards 0.9s; }
+    .hero-forever { font-family: 'Playfair Display', serif; font-style: italic; color: rgba(244,167,195,0.55); font-size: 20px; opacity: 0; animation: fadeUp 1.2s ease forwards 1.2s; }
+    .hero-scroll { position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%); opacity: 0; animation: fadeUp 1s ease forwards 2s; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .hero-scroll span { font-size: 9px; letter-spacing: 4px; color: var(--gray); }
+    .scroll-line { width: 1px; height: 50px; background: linear-gradient(var(--pink), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+    @keyframes scrollPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes fadeUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
+    /* DAYS COUNTER */
+    .days-counter {
+      position: absolute; bottom: 80px; right: 60px; z-index: 1;
+      text-align: center;
+    }
+    .days-num { font-family: 'Playfair Display', serif; font-size: 52px; font-weight: 900; color: var(--pink); line-height: 1; }
+    .days-label { font-size: 9px; letter-spacing: 3px; color: var(--gray); margin-top: 5px; }
 
-        /* ─── HERO ─── */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 40px 30px;
-            background: linear-gradient(rgba(13, 11, 12, 0.4), rgba(13, 11, 12, 0.85)), url('images/hero.jpg') center/cover fixed;
-            position: relative;
-            z-index: 1;
-        }
+    /* CHAPTER */
+    .chapter { padding: 120px 40px; max-width: 800px; margin: 0 auto; text-align: center; }
+    .chapter-num { font-size: 10px; letter-spacing: 6px; color: var(--gold); margin-bottom: 20px; display: block; opacity: 0; transform: translateY(20px); transition: all 0.8s ease; }
+    .chapter-num.visible { opacity: 1; transform: translateY(0); }
+    .chapter-title { font-family: 'Playfair Display', serif; font-size: clamp(32px, 6vw, 56px); font-weight: 700; line-height: 1.1; margin-bottom: 30px; color: var(--white); opacity: 0; transform: translateY(25px); transition: all 0.8s ease 0.15s; }
+    .chapter-title.visible { opacity: 1; transform: translateY(0); }
+    .chapter-title em { color: var(--pink); font-style: italic; }
+    .chapter-quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(18px, 3vw, 26px); color: var(--pink); line-height: 1.6; margin-bottom: 35px; padding: 20px 30px; border-left: 2px solid var(--pink-deep); text-align: left; opacity: 0; transform: translateY(20px); transition: all 0.8s ease 0.25s; background: rgba(244,167,195,0.03); }
+    .chapter-quote.visible { opacity: 1; transform: translateY(0); }
+    .chapter-text { font-size: 16px; line-height: 1.9; color: rgba(253,246,249,0.65); font-weight: 300; opacity: 0; transform: translateY(20px); transition: all 0.8s ease 0.35s; }
+    .chapter-text.visible { opacity: 1; transform: translateY(0); }
 
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 150px;
-            background: linear-gradient(transparent, var(--dark));
-        }
+    /* DIVIDER */
+    .divider { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 20px 40px; max-width: 600px; margin: 0 auto; }
+    .divider-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(244,167,195,0.25), transparent); }
+    .divider-icon { color: var(--pink); font-size: 14px; opacity: 0.5; }
 
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(56px, 14vw, 130px);
-            font-weight: 700;
-            color: var(--pink-glow);
-            text-shadow: 0 0 80px rgba(245, 160, 181, 0.4);
-            letter-spacing: 6px;
-            z-index: 2;
-            animation: pulseGlow 4s ease-in-out infinite;
-        }
+    /* PHOTO GRID */
+    .photo-section { padding: 20px; max-width: 1200px; margin: 0 auto; }
+    .photo-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .photo-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+    .photo-grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 6px; }
+    .photo-item { overflow: hidden; position: relative; }
+    .photo-item img { width: 100%; height: 280px; object-fit: cover; transition: transform 0.7s ease; filter: brightness(0.88) saturate(0.9); }
+    .photo-item:hover img { transform: scale(1.04); filter: brightness(1) saturate(1); }
+    .photo-item.tall img { height: 420px; }
 
-        @keyframes pulseGlow {
-            0%, 100% { text-shadow: 0 0 40px rgba(245, 160, 181, 0.2); }
-            50% { text-shadow: 0 0 80px rgba(245, 160, 181, 0.5); }
-        }
+    /* VIDEO */
+    .video-section { padding: 20px; max-width: 1200px; margin: 0 auto; }
+    .video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .video-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .video-item video { width: 100%; border-radius: 3px; outline: none; max-height: 380px; object-fit: cover; }
 
-        .hero .subtitle {
-            font-size: clamp(16px, 2.5vw, 26px);
-            font-weight: 300;
-            letter-spacing: 8px;
-            color: var(--gold-soft);
-            margin-top: 10px;
-            z-index: 2;
-            font-style: italic;
-        }
+    /* DATE TAG */
+    .date-tag { display: inline-block; padding: 8px 22px; border: 1px solid rgba(244,167,195,0.25); font-size: 10px; letter-spacing: 4px; color: var(--pink); margin-bottom: 30px; border-radius: 20px; }
 
-        .hero .date-tag {
-            font-size: 14px;
-            letter-spacing: 10px;
-            color: rgba(255,255,255,0.4);
-            margin-top: 24px;
-            z-index: 2;
-            text-transform: uppercase;
-        }
+    /* PINK WORLD */
+    .pink-world { background: linear-gradient(135deg, rgba(244,167,195,0.05), rgba(212,175,122,0.03)); padding: 80px 40px; text-align: center; }
+    .pink-emoji { font-size: 50px; margin-bottom: 20px; display: block; }
 
-        .hero .scroll-hint {
-            position: absolute;
-            bottom: 50px;
-            z-index: 2;
-            color: rgba(255,255,255,0.25);
-            font-size: 12px;
-            letter-spacing: 4px;
-            animation: bounceDown 2s infinite;
-        }
+    /* LOVE LETTER */
+    .love-letter { max-width: 700px; margin: 0 auto; padding: 60px 40px; }
+    .letter-paper {
+      background: rgba(244,167,195,0.03); border: 1px solid rgba(244,167,195,0.12);
+      padding: 60px; border-radius: 2px; position: relative;
+    }
+    .letter-paper::before { content: '💗'; position: absolute; top: 25px; right: 30px; font-size: 20px; opacity: 0.3; }
+    .letter-paper::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, transparent, var(--pink-deep), transparent); }
+    .letter-greeting { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--pink); margin-bottom: 30px; font-style: italic; }
+    .letter-body { font-size: 15px; line-height: 2.1; color: rgba(253,246,249,0.72); font-weight: 300; margin-bottom: 20px; }
+    .letter-signature { font-family: 'Playfair Display', serif; font-style: italic; color: var(--gold); font-size: 22px; margin-top: 45px; }
 
-        @keyframes bounceDown {
-            0%, 100% { transform: translateY(0); opacity: 0.3; }
-            50% { transform: translateY(12px); opacity: 1; }
-        }
+    /* FINALE */
+    .finale { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 20px; position: relative; overflow: hidden; }
+    .finale-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(244,167,195,0.07) 0%, transparent 70%); }
+    .finale-content { position: relative; z-index: 1; }
+    .finale-title { font-family: 'Playfair Display', serif; font-size: clamp(50px, 10vw, 110px); font-weight: 900; color: var(--white); text-shadow: 0 0 80px rgba(244,167,195,0.25); margin-bottom: 20px; }
+    .finale-sub { font-size: 14px; letter-spacing: 5px; color: var(--gold); margin-bottom: 40px; }
+    .finale-message { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(16px, 2.5vw, 22px); color: rgba(253,246,249,0.65); max-width: 600px; line-height: 1.8; margin-bottom: 30px; }
+    .finale-love { font-size: clamp(22px, 4vw, 36px); color: var(--pink); font-family: 'Playfair Display', serif; margin-bottom: 15px; }
+    .finale-soon { font-size: 14px; letter-spacing: 2px; color: var(--gray); font-style: italic; }
 
-        /* ─── CHAPTER TITLES ─── */
-        .chapter-label {
-            font-size: 11px;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            color: var(--pink);
-            opacity: 0.6;
-            margin-bottom: 8px;
-        }
+    /* FOOTER */
+    footer { padding: 60px 40px 100px; text-align: center; border-top: 1px solid rgba(244,167,195,0.08); }
+    footer p { color: var(--gray); font-size: 12px; letter-spacing: 1px; line-height: 2.2; }
+    footer .footer-heart { color: var(--pink); }
 
-        .chapter-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(32px, 6vw, 64px);
-            font-weight: 400;
-            color: var(--soft-white);
-            text-align: center;
-            margin-bottom: 6px;
-        }
+    /* FADE IN */
+    .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.9s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-        .chapter-title .highlight {
-            color: var(--pink-glow);
-            font-style: italic;
-            text-shadow: 0 0 40px rgba(245, 160, 181, 0.2);
-        }
-
-        .chapter-date {
-            font-size: 13px;
-            letter-spacing: 8px;
-            color: var(--gold-soft);
-            opacity: 0.6;
-            margin-bottom: 20px;
-        }
-
-        .chapter-text {
-            max-width: 680px;
-            text-align: center;
-            font-size: 18px;
-            line-height: 2.2;
-            color: rgba(255,255,255,0.8);
-            font-weight: 300;
-            letter-spacing: 0.5px;
-        }
-
-        .chapter-text .quote {
-            font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            color: var(--pink-glow);
-            font-style: italic;
-            display: block;
-            margin: 16px 0;
-        }
-
-        .chapter-text .caption {
-            font-size: 14px;
-            color: var(--gold-soft);
-            opacity: 0.5;
-            margin-top: 14px;
-            letter-spacing: 2px;
-            font-style: italic;
-        }
-
-        .chapter-divider {
-            width: 60px;
-            height: 2px;
-            background: var(--pink);
-            opacity: 0.3;
-            margin: 20px auto;
-            border-radius: 10px;
-        }
-
-        /* ─── GALLERY GRID ─── */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            max-width: 1200px;
-            width: 100%;
-            margin: 30px auto 0;
-        }
-
-        .gallery-grid img {
-            width: 100%;
-            height: 260px;
-            object-fit: cover;
-            border-radius: 20px;
-            transition: 0.5s;
-            border: 2px solid rgba(255,255,255,0.04);
-        }
-
-        .gallery-grid img:hover {
-            transform: scale(1.04) rotate(-1deg);
-            border-color: var(--pink);
-            box-shadow: 0 0 50px rgba(245, 160, 181, 0.15);
-        }
-
-        .gallery-grid.tall img { height: 340px; }
-        .gallery-grid.wide img { height: 200px; }
-
-        /* ─── VIDEO GRID ─── */
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            width: 100%;
-            margin: 30px auto 0;
-        }
-
-        .video-grid .video-wrapper {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            background: #1a1416;
-            border: 2px solid rgba(255,255,255,0.04);
-            transition: 0.5s;
-        }
-
-        .video-grid .video-wrapper:hover {
-            border-color: var(--pink);
-            transform: scale(1.02);
-            box-shadow: 0 0 50px rgba(245, 160, 181, 0.1);
-        }
-
-        .video-grid video {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .video-grid .video-wrapper::after {
-            content: '▶';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 40px;
-            color: white;
-            opacity: 0.5;
-            text-shadow: 0 0 30px rgba(0,0,0,0.5);
-            pointer-events: none;
-            transition: 0.3s;
-        }
-
-        .video-grid .video-wrapper:hover::after {
-            opacity: 0.8;
-            transform: translate(-50%, -50%) scale(1.1);
-        }
-
-        /* ─── PINK WORLD ─── */
-        .pink-world {
-            background: linear-gradient(135deg, #1a0e12, #0d0b0c);
-            border-top: 2px solid rgba(245, 160, 181, 0.08);
-            border-bottom: 2px solid rgba(245, 160, 181, 0.08);
-            padding: 80px 30px;
-        }
-
-        .pink-world .chapter-title .highlight {
-            color: var(--pink-glow);
-            text-shadow: 0 0 60px rgba(245, 160, 181, 0.3);
-        }
-
-        /* ─── LETTER ─── */
-        .letter {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 40px 0;
-            text-align: center;
-        }
-
-        .letter p {
-            font-size: 18px;
-            line-height: 2.4;
-            color: rgba(255,255,255,0.85);
-            font-weight: 300;
-            letter-spacing: 0.5px;
-            margin-bottom: 20px;
-        }
-
-        .letter .signature {
-            font-family: 'Playfair Display', serif;
-            font-size: 30px;
-            color: var(--pink-glow);
-            font-style: italic;
-            margin-top: 30px;
-            text-shadow: 0 0 40px rgba(245, 160, 181, 0.2);
-        }
-
-        /* ─── FINALE ─── */
-        .finale {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 60px 30px;
-            background: linear-gradient(rgba(13, 11, 12, 0.2), rgba(13, 11, 12, 0.9)), url('images/mpb.jpg') center/cover fixed;
-            position: relative;
-            z-index: 1;
-        }
-
-        .finale::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 150px;
-            background: linear-gradient(var(--dark), transparent);
-        }
-
-        .finale h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(48px, 10vw, 100px);
-            color: var(--pink-glow);
-            text-shadow: 0 0 100px rgba(245, 160, 181, 0.5);
-            z-index: 2;
-            letter-spacing: 6px;
-        }
-
-        .finale .sub {
-            font-size: 22px;
-            color: var(--gold-soft);
-            letter-spacing: 6px;
-            margin-top: 16px;
-            z-index: 2;
-            font-weight: 300;
-        }
-
-        .finale .final-message {
-            max-width: 600px;
-            font-size: 18px;
-            line-height: 2.2;
-            color: rgba(255,255,255,0.7);
-            margin-top: 24px;
-            z-index: 2;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-
-        .finale .final-message .big-heart {
-            font-size: 48px;
-            color: var(--pink-glow);
-            display: block;
-            margin: 16px 0;
-            animation: pulseGlow 2s ease-in-out infinite;
-        }
-
-        /* ─── FOOTER ─── */
-        footer {
-            text-align: center;
-            padding: 40px 30px;
-            color: rgba(255,255,255,0.15);
-            font-size: 12px;
-            letter-spacing: 4px;
-            background: var(--dark);
-            border-top: 1px solid rgba(255,255,255,0.03);
-            position: relative;
-            z-index: 1;
-        }
-
-        footer .footer-hearts {
-            color: var(--pink);
-            font-size: 16px;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        /* ─── RESPONSIVE ─── */
-        @media (max-width: 768px) {
-            .section { padding: 60px 20px; }
-            .chapter-text { font-size: 16px; line-height: 2; }
-            .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
-            .gallery-grid img { height: 180px; }
-            .video-grid { grid-template-columns: 1fr 1fr; }
-            .video-grid video { height: 200px; }
-            .hero h1 { font-size: 56px; }
-            .letter p { font-size: 16px; line-height: 2.2; }
-            .cinematic { height: 4vh; }
-        }
-
-        @media (max-width: 480px) {
-            .gallery-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-            .gallery-grid img { height: 150px; }
-            .video-grid { grid-template-columns: 1fr; }
-            .video-grid video { height: 220px; }
-            .hero h1 { font-size: 42px; }
-            .chapter-title { font-size: 28px; }
-        }
-    </style>
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .bar-top, .bar-bottom { height: 40px; }
+      .story-nav { display: none; }
+      .countdown-bar { top: 40px; }
+      .days-counter { display: none; }
+      .photo-grid-3 { grid-template-columns: 1fr 1fr; }
+      .photo-grid-4 { grid-template-columns: 1fr 1fr; }
+      .video-grid { grid-template-columns: 1fr; }
+      .video-grid-3 { grid-template-columns: 1fr 1fr; }
+      .chapter { padding: 80px 20px; }
+      .letter-paper { padding: 30px 20px; }
+      .love-letter { padding: 40px 15px; }
+      .music-player { bottom: 55px; right: 10px; padding: 8px 14px; }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- ─── FLOATING HEARTS ─── -->
-    <div class="hearts-container" id="hearts"></div>
+  <!-- CURSOR -->
+  <div class="cursor" id="cursor">💗</div>
 
-    <div class="cinematic cinematic-top"></div>
-    <div class="cinematic cinematic-bottom"></div>
+  <!-- HEARTS -->
+  <div class="hearts-container" id="hearts"></div>
 
-    <!-- ============================================ -->
-    <!-- HERO — MY LOVE                              -->
-    <!-- ============================================ -->
-    <section class="hero" id="hero">
-        <h1>MY LOVE</h1>
-        <div class="subtitle">✦ Our Story ✦</div>
-        <div class="date-tag">November 15 — Forever</div>
-        <div class="scroll-hint">↓ Scroll to begin ↓</div>
-    </section>
+  <!-- BARS -->
+  <div class="bar-top"></div>
+  <div class="bar-bottom"></div>
 
-    <!-- ============================================ -->
-    <!-- CHAPTER 1 — THE BEGINNING                    -->
-    <!-- ============================================ -->
-    <section class="section" id="beginning">
-        <div class="chapter-label">Chapter One</div>
-        <div class="chapter-title">The <span class="highlight">Beginning</span></div>
-        <div class="chapter-date">November 15, 2024</div>
-        <div class="chapter-text">
-            <span class="quote">"I don't usually text first, but you looked too tempting to ignore."</span>
-            A message that changed everything. Two strangers, one screen, and a spark that would grow into something neither of us expected.
-            <div class="chapter-divider"></div>
-            <span class="caption">— The moment it all started</span>
-        </div>
-        <div class="gallery-grid">
-            <img src="images/firstkiss.jpg" alt="Our first kiss" loading="lazy">
-            <img src="images/dorm.jpg" alt="First time at my dorm" loading="lazy">
-            <img src="images/amazimgmessa.jpg" alt="Amazing message" loading="lazy">
-        </div>
-    </section>
+  <!-- COUNTDOWN BAR — only days together -->
+  <div class="countdown-bar" id="countdownBar">Loading...</div>
 
-    <!-- ============================================ -->
-    <!-- CHAPTER 2 — THE QUESTION                     -->
-    <!-- ============================================ -->
-    <section class="section" id="question">
-        <div class="chapter-label">Chapter Two</div>
-        <div class="chapter-title">The <span class="highlight">Question</span></div>
-        <div class="chapter-date">December 13, 2024</div>
-        <div class="chapter-text">
-            <span class="quote">"Will you be mine?"</span>
-            She said yes. And my world has never been the same. 
-            That day, I didn't just get a girlfriend — I found my home.
-            <div class="chapter-divider"></div>
-            <span class="caption">— The best yes of my life</span>
-        </div>
-        <div class="gallery-grid">
-            <img src="images/sur1.jpg" alt="The day I asked" loading="lazy">
-            <img src="images/sur2.jpg" alt="Her smile" loading="lazy">
-            <img src="images/sur3.jpg" alt="Us together" loading="lazy">
-            <img src="images/sur4.jpg" alt="Our first date" loading="lazy">
-        </div>
-        <div class="video-grid">
-            <div class="video-wrapper">
-                <video src="vids/firstdate.mp3" controls playsinline></video>
-            </div>
-        </div>
-    </section>
+  <!-- STORY NAV -->
+  <nav class="story-nav">
+    <a href="#chapter1">The Beginning</a>
+    <a href="#chapter2">The Question</a>
+    <a href="#chapter3">First Moments</a>
+    <a href="#chapter4">Seven Months</a>
+    <a href="#chapter5">Our Walks</a>
+    <a href="#chapter6">Just Us</a>
+    <a href="#chapter7">The Distance</a>
+    <a href="#chapter8">Surprises</a>
+    <a href="#chapter9">Pink World</a>
+    <a href="#letter">Love Letter</a>
+  </nav>
 
-    <!-- ============================================ -->
-    <!-- CHAPTER 3 — OUR FIRST MONTHS                 -->
-    <!-- ============================================ -->
-    <section class="section" id="earlydays">
-        <div class="chapter-label">Chapter Three</div>
-        <div class="chapter-title">Our First <span class="highlight">Moments</span></div>
-        <div class="chapter-date">November — December 2024</div>
-        <div class="chapter-text">
-            The beginning of everything. Late-night talks, stolen glances, 
-            and the feeling that we had known each other for lifetimes.
-            <div class="chapter-divider"></div>
-            <span class="caption">— When forever started feeling real</span>
-        </div>
-        <div class="gallery-grid wide">
-            <img src="images/cuddling1.jpg" alt="Cuddling" loading="lazy">
-            <img src="images/cuddling2.jpg" alt="Cuddling" loading="lazy">
-            <img src="images/cuddling3.jpg" alt="Cuddling" loading="lazy">
-        </div>
-        <div class="video-grid">
-            <div class="video-wrapper"><video src="vids/cuddling1.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/cuddling2.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/cuddling3.mp3" controls playsinline></video></div>
-        </div>
-    </section>
+  <!-- MUSIC PLAYER -->
+  <div class="music-player">
+    <div class="music-wave" id="musicWave">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="music-info">
+      <span class="music-title">LOVE SONG</span>
+      <span class="music-artist">Adele</span>
+    </div>
+    <button class="music-btn" id="musicBtn" onclick="toggleMusic()">
+      <i class="fas fa-pause" id="musicIcon"></i>
+    </button>
+  </div>
+  <audio id="bgMusic" loop>
+    <source src="audio/song.mp3.mp3" type="audio/mpeg">
+  </audio>
 
-    <!-- ============================================ -->
-    <!-- CHAPTER 4 — SIX MONTHS OF US                 -->
-    <!-- ============================================ -->
-    <section class="section" id="flashbacks">
-        <div class="chapter-label">Chapter Four</div>
-        <div class="chapter-title">Six Months of <span class="highlight">Us</span></div>
-        <div class="chapter-date">November 2024 — May 2025</div>
-        <div class="chapter-text">
-            <span class="quote">"You didn't just become my boyfriend. You became my home."</span>
-            Every moment, every laugh, every silent understanding — this is what we built together.
-            <div class="chapter-divider"></div>
-            <span class="caption">— Our little universe</span>
-        </div>
-        <div class="gallery-grid tall">
-            <img src="images/cutemoments1.jpg" alt="Cute moment" loading="lazy">
-            <img src="images/cutemoments2.jpg" alt="Cute moment" loading="lazy">
-            <img src="images/cutemoments3.jpg" alt="Cute moment" loading="lazy">
-            <img src="images/cutemoments4.jpg" alt="Cute moment" loading="lazy">
-            <img src="images/cutemoments5.jpg" alt="Cute moment" loading="lazy">
-            <img src="images/cutemoments6.jpg" alt="Cute moment" loading="lazy">
-            <img src="images/cutemoments7.jpg" alt="Cute moment" loading="lazy">
-            <img src="images/cutemoments8.jpg" alt="Cute moment" loading="lazy">
-            <img src="images/cutemoments9.jpg" alt="Cute moment" loading="lazy">
-            <img src="images/cutemoments10.jpg" alt="Cute moment" loading="lazy">
-            <img src="images/cutemoments11.jpg" alt="Cute moment" loading="lazy">
-            <img src="images/cutemoments12.jpg" alt="Cute moment" loading="lazy">
-            <img src="images/cutemoments13.jpg" alt="Cute moment" loading="lazy">
-            <img src="images/cutemoments14.jpg" alt="Cute moment" loading="lazy">
-            <img src="images/cutemoments15.jpg" alt="Cute moment" loading="lazy">
-            <img src="images/cutemoments16.jpg" alt="Cute moment" loading="lazy">
-            <img src="images/cutemoments17.jpg" alt="Cute moment" loading="lazy">
-            <img src="images/cutemoments18.jpg" alt="Cute moment" loading="lazy">
-            <img src="images/cutemoments19.jpg" alt="Cute moment" loading="lazy">
-        </div>
-        <div class="video-grid">
-            <div class="video-wrapper"><video src="vids/cutemoments1.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/cutemoments2.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/cutemoments3.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/cutemoments4.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/cutemoments5.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/cutemoments6.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/cutemoments7.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/cutemoments8.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/cutemoments9.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/cutemoments10.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/cutemoments11.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/cutemoments12.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/cutemoments13.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/cutemoments14.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/cutemoments15.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/cutemoments16.mp3" controls playsinline></video></div>
-        </div>
-    </section>
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <img src="images/hero.jpg.jpeg" alt="My Love" loading="lazy">
+    </div>
+    <div class="hero-content">
+      <div class="hero-date">JULY 16, 2026 ✦ HER 18TH BIRTHDAY</div>
+      <h1 class="hero-title">MY LOVE</h1>
+      <div class="hero-sub">✦ Our Story ✦</div>
+      <div class="hero-forever">November 15 — Forever</div>
+    </div>
+    <div class="days-counter">
+      <div class="days-num" id="daysCount">—</div>
+      <div class="days-label">DAYS TOGETHER</div>
+    </div>
+    <div class="hero-scroll">
+      <span>SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
 
-    <!-- ============================================ -->
-    <!-- CHAPTER 5 — WALKS TOGETHER                   -->
-    <!-- ============================================ -->
-    <section class="section" id="walks">
-        <div class="chapter-label">Chapter Five</div>
-        <div class="chapter-title">Walking <span class="highlight">Together</span></div>
-        <div class="chapter-date">Every step with you</div>
-        <div class="chapter-text">
-            Hand in hand, through the streets of Belarus. Every walk felt like a scene from a movie — because it was ours.
-            <div class="chapter-divider"></div>
-            <span class="caption">— Where we wrote our story, step by step</span>
+  <!-- CHAPTER 1 -->
+  <section id="chapter1">
+    <div class="chapter">
+      <span class="chapter-num">CHAPTER ONE ✦ NOVEMBER 15, 2025</span>
+      <h2 class="chapter-title">The <em>Beginning</em></h2>
+      <blockquote class="chapter-quote">"I don't usually text first, but you looked too tempting to ignore."</blockquote>
+      <p class="chapter-text">One message. That's all it took. On November 15, 2025, I opened Telegram and typed the first words that would change everything. I don't know what I was thinking — maybe I wasn't thinking at all. Maybe something in me just knew. That night, something shifted. And nothing has been the same since.</p>
+    </div>
+    <div class="photo-section fade-in">
+      <div class="photo-grid-2">
+        <div class="photo-item tall">
+          <img src="images/dorm.jpeg" alt="Us" loading="lazy">
         </div>
-        <div class="gallery-grid wide">
-            <img src="images/walking1.jpg" alt="Walking" loading="lazy">
-            <img src="images/walking2.jpg" alt="Walking" loading="lazy">
-            <img src="images/walking3.jpg" alt="Walking" loading="lazy">
-            <img src="images/walking4.jpg" alt="Walking" loading="lazy">
-            <img src="images/walking5.jpg" alt="Walking" loading="lazy">
-            <img src="images/walking6.jpg" alt="Walking" loading="lazy">
-            <img src="images/walking7.jpg" alt="Walking" loading="lazy">
-        </div>
-        <div class="video-grid">
-            <div class="video-wrapper"><video src="vids/walking1.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/walking2.mp3" controls playsinline></video></div>
-        </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- ============================================ -->
-    <!-- CHAPTER 6 — THE DISTANCE                     -->
-    <!-- ============================================ -->
-    <section class="section" id="distance">
-        <div class="chapter-label">Chapter Six</div>
-        <div class="chapter-title">The <span class="highlight">Distance</span></div>
-        <div class="chapter-date">Lebanon — Belarus</div>
-        <div class="chapter-text">
-            <span class="quote">"It hurts without you."</span>
-            You watched my flight home. Every mile between us, you felt it too. 
-            But distance is just a chapter — not the whole story.
-            <div class="chapter-divider"></div>
-            <span class="caption">— Waiting for the day I hold you again</span>
-        </div>
-        <div class="gallery-grid wide">
-            <img src="images/awm1.jpg" alt="Always with me" loading="lazy">
-            <img src="images/awm2.jpg" alt="Always with me" loading="lazy">
-            <img src="images/awm3.jpg" alt="Always with me" loading="lazy">
-            <img src="images/awm4.jpg" alt="Always with me" loading="lazy">
-        </div>
-        <div style="margin-top: 30px; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-            <img src="images/lastday1.jpg" alt="Last day together" style="width: 200px; height: 250px; object-fit: cover; border-radius: 20px; border: 2px solid rgba(255,255,255,0.05); transition: 0.4s;">
-            <img src="images/lastday2.jpg" alt="Last day together" style="width: 200px; height: 250px; object-fit: cover; border-radius: 20px; border: 2px solid rgba(255,255,255,0.05); transition: 0.4s;">
-        </div>
-        <div class="video-grid">
-            <div class="video-wrapper"><video src="vids/lastday1.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/lastday2.mp3" controls playsinline></video></div>
-        </div>
-    </section>
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">💗</div><div class="divider-line"></div></div>
 
-    <!-- ============================================ -->
-    <!-- CHAPTER 7 — SURPRISES                        -->
-    <!-- ============================================ -->
-    <section class="section" id="surprises">
-        <div class="chapter-label">Chapter Seven</div>
-        <div class="chapter-title">Our <span class="highlight">Surprises</span></div>
-        <div class="chapter-date">For each other</div>
-        <div class="chapter-text">
-            The little moments, the unexpected gifts, the "I was thinking of you" — this is how we love.
-            <div class="chapter-divider"></div>
-            <span class="caption">— Because love is in the details</span>
-        </div>
-        <div class="video-grid">
-            <div class="video-wrapper"><video src="vids/sur1.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/sur2.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/sur3.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/sur4.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/sur5.mp3" controls playsinline></video></div>
-            <div class="video-wrapper"><video src="vids/sur6.mp3" controls playsinline></video></div>
-        </div>
-    </section>
+  <!-- CHAPTER 2 -->
+  <section id="chapter2">
+    <div class="chapter">
+      <span class="chapter-num">CHAPTER TWO ✦ DECEMBER 13, 2025</span>
+      <h2 class="chapter-title">The <em>Question</em></h2>
+      <blockquote class="chapter-quote">"Will you be mine?"</blockquote>
+      <p class="chapter-text">December 13, 2025. My heart was racing. I asked, and she said yes. In that one moment, I found something I didn't know I was looking for — a home. Not a place, not a city. Her. She became my home the second she said yes.</p>
+    </div>
+  </section>
 
-    <!-- ============================================ -->
-    <!-- CHAPTER 8 — PINK WORLD                       -->
-    <!-- ============================================ -->
-    <section class="section pink-world" id="pink">
-        <div class="chapter-label">✦ Her World ✦</div>
-        <div class="chapter-title">My Love's <span class="highlight">Pink World</span></div>
-        <div class="chapter-date">🌸 Where everything is pink 🌸</div>
-        <div class="chapter-text">
-            <span class="quote">"She wants to live in her pink world."</span>
-            And honestly? She deserves it. Pink sunsets, pink dreams, and one very special pink tractor 🚜💗
-            <div class="chapter-divider"></div>
-            <span class="caption">— The world you deserve, painted in your favorite color</span>
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">💗</div><div class="divider-line"></div></div>
+
+  <!-- CHAPTER 3 -->
+  <section id="chapter3">
+    <div class="chapter">
+      <span class="chapter-num">CHAPTER THREE ✦ NOVEMBER — DECEMBER 2025</span>
+      <h2 class="chapter-title">First <em>Moments</em></h2>
+      <p class="chapter-text">Late nights that turned into early mornings. Conversations that never ran out. Stolen glances that said more than words ever could. We talked like we'd known each other for lifetimes — because maybe, in some way, we had. The first kiss, November 16, just after midnight. A chapter I'll never stop rereading.</p>
+    </div>
+    <div class="photo-section fade-in">
+      <div class="photo-grid-2">
+        <div class="photo-item tall"><img src="images/firstkiss.jpg.jpeg" alt="First kiss" loading="lazy"></div>
+        <div class="photo-item tall"><img src="images/cuddling1.jpg.jpeg" alt="Us" loading="lazy"></div>
+      </div>
+    </div>
+    <div class="video-section fade-in">
+      <div class="video-grid">
+        <div class="video-item"><video controls playsinline><source src="vids/firstdate.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/cuddling1.mp3.mp4" type="video/mp4"></video></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">💗</div><div class="divider-line"></div></div>
+
+  <!-- CHAPTER 4 -->
+  <section id="chapter4">
+    <div class="chapter">
+      <span class="chapter-num">CHAPTER FOUR ✦ NOVEMBER 2025 — TODAY</span>
+      <h2 class="chapter-title">Seven Months <em>of Us</em></h2>
+      <blockquote class="chapter-quote">"You didn't just become my boyfriend. You became my home."</blockquote>
+      <p class="chapter-text">Seven months. Every laugh, every silence, every late-night call, every moment we built together — it all adds up to something I can't put into words. I didn't expect you. And yet here you are, woven into every corner of my life. That's the thing about the right person — they don't just enter your world. They become it.</p>
+    </div>
+    <div class="photo-section fade-in">
+      <div class="photo-grid-4">
+        <div class="photo-item"><img src="images/cutemoments1.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/cutemoments2.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/cutemoments3.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/cutemoments4.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/cutemoments5.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/cutemoments6.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/cutemoments7.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/cutemoments8.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/cutemoments9.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/cutemoments10.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/cutemoments11.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/cutemoments12.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/cutemoments13.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/cutemoments14.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/cutemoments15.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/cutemoments16.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/cutemoments17.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/cutemoments18.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/cutemoments19.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/cutemoments20.jpg.jpeg" alt="" loading="lazy"></div>
+      </div>
+    </div>
+    <div class="video-section fade-in">
+      <div class="video-grid-3">
+        <div class="video-item"><video controls playsinline><source src="vids/cutemoments1.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/cutemoments2.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/cutemoments3.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/cutemoments4.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/cutemoments5.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/cutemoments6.mp3.mp4" type="video/mp4"></video></div>
+      </div>
+    </div>
+    <div class="video-section fade-in">
+      <div class="video-grid-3">
+        <div class="video-item"><video controls playsinline><source src="vids/cutemoments7.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/cutemoments8.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/cutemoments9.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/cutemoments10.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/cutemoments11.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/cutemoments12.mp3.mp4" type="video/mp4"></video></div>
+      </div>
+    </div>
+    <div class="video-section fade-in">
+      <div class="video-grid-3">
+        <div class="video-item"><video controls playsinline><source src="vids/cutemoments13.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/cutemoments14.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/cutemoments15.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/cutemoments16.mp3.mp4" type="video/mp4"></video></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">💗</div><div class="divider-line"></div></div>
+
+  <!-- CHAPTER 5 -->
+  <section id="chapter5">
+    <div class="chapter">
+      <span class="chapter-num">CHAPTER FIVE ✦ OUR WALKS</span>
+      <h2 class="chapter-title">Walking <em>Together</em></h2>
+      <p class="chapter-text">Every walk with you felt like a scene from a movie I never wanted to end. The streets of Belarus, the cold air, your hand in mine — there's a kind of magic in the ordinary when it's you beside me. Every corner we turned together became a memory I carry with me, even now, across the distance.</p>
+    </div>
+    <div class="photo-section fade-in">
+      <div class="photo-grid-3">
+        <div class="photo-item tall"><img src="images/walking1.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item tall"><img src="images/walking2.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item tall"><img src="images/walking3.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item tall"><img src="images/walking4.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item tall"><img src="images/walking5.jpg.jpeg" alt="" loading="lazy"></div>
+      </div>
+    </div>
+    <div class="photo-section fade-in">
+      <div class="photo-grid-2">
+        <div class="video-item" style="padding:0;">
+          <video controls playsinline style="width:100%;height:100%;object-fit:cover;max-height:420px;">
+            <source src="vids/walking1.mp3.mp4" type="video/mp4">
+          </video>
         </div>
-        <div style="margin-top: 30px; max-width: 400px; width: 100%;">
-            <img src="images/mpb.jpg" alt="My pink barbie" style="width: 100%; height: 450px; object-fit: cover; border-radius: 24px; border: 3px solid rgba(245, 160, 181, 0.15); box-shadow: 0 0 80px rgba(245, 160, 181, 0.05);">
-        </div>
-    </section>
+      </div>
+    </div>
+    <div class="video-section fade-in">
+      <div class="video-grid">
+        <div class="video-item"><video controls playsinline><source src="vids/walking2.mp3.mp4" type="video/mp4"></video></div>
+      </div>
+    </div>
+  </section>
 
-    <!-- ============================================ -->
-    <!-- CHAPTER 9 — LOVE LETTER                      -->
-    <!-- ============================================ -->
-    <section class="section" id="letter">
-        <div class="chapter-label">Chapter Nine</div>
-        <div class="chapter-title">My <span class="highlight">Letter</span> to You</div>
-        <div class="chapter-date">July 16, 2025</div>
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">💗</div><div class="divider-line"></div></div>
 
-        <div class="letter">
-            <p>
-                My love,
-            </p>
-            <p>
-                From the moment I sent that first message, I had no idea my life was about to change forever. 
-                November 15 was just a date on the calendar — until it became the day I found you.
-            </p>
-            <p>
-                December 13, when you said "yes," I didn't just get a girlfriend. I found my home. 
-                You became the person I think about first in the morning and the last before I sleep.
-            </p>
-            <p>
-                I know distance is hard. I know you've had nightmares, fears, and moments of doubt. 
-                But I need you to hear this: <strong style="color: var(--pink-glow);">I am not going anywhere.</strong> 
-                You are my home. And home isn't a place — it's you.
-            </p>
-            <p>
-                You watched my flight home. You stayed up late for calls. You sent me messages that made my heart ache 
-                because I missed you so much. And through all of that, you showed me what real love looks like.
-            </p>
-            <p>
-                Today, you turn 18. The most beautiful girl I've ever met, stepping into a new chapter of her life. 
-                And I'm so grateful that I get to be part of it.
-            </p>
-            <p>
-                Thank you for loving me. For choosing me. For being my pink world, my calm harbor, 
-                and my wildest adventure all at once.
-            </p>
-            <p>
-                I love you — to the very last star and back. 💗
-            </p>
-            <div class="signature">— Yours, always ❤️</div>
-        </div>
-    </section>
+  <!-- CHAPTER 6 -->
+  <section id="chapter6">
+    <div class="chapter">
+      <span class="chapter-num">CHAPTER SIX ✦ CLOSE TO YOU</span>
+      <h2 class="chapter-title">Just <em>Us</em></h2>
+      <p class="chapter-text">There's a version of happiness that doesn't need words. It's quiet. It's warm. It's lying next to you and feeling like the whole world has shrunk down to just this room, just this moment, just us.</p>
+    </div>
+    <div class="photo-section fade-in">
+      <div class="photo-grid-3">
+        <div class="photo-item tall"><img src="images/cuddling1.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item tall"><img src="images/cuddling2.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item tall"><img src="images/cuddling3.jpg.jpeg" alt="" loading="lazy"></div>
+      </div>
+    </div>
+    <div class="video-section fade-in">
+      <div class="video-grid-3">
+        <div class="video-item"><video controls playsinline><source src="vids/cuddling2.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/cuddling3.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/bitting1.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/bitting2.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/bitting3.mp3.mp4" type="video/mp4"></video></div>
+      </div>
+    </div>
+  </section>
 
-    <!-- ============================================ -->
-    <!-- FINALE — HAPPY BIRTHDAY                      -->
-    <!-- ============================================ -->
-    <section class="finale" id="finale">
-        <h1>HAPPY 18TH</h1>
-        <div class="sub">✦ My Love ✦</div>
-        <div class="final-message">
-            From Lebanon to Belarus — distance can't stop love.<br>
-            You are my home. Today, tomorrow, and always.<br><br>
-            <span style="color: var(--pink-glow); font-size: 28px; letter-spacing: 2px;">I love you. 💗</span><br><br>
-            <span style="color: var(--gold-soft); font-size: 16px; letter-spacing: 3px;">See you soon, my love.</span>
-            <span class="big-heart">💗</span>
-        </div>
-    </section>
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">💗</div><div class="divider-line"></div></div>
 
-    <!-- ─── FOOTER ─── -->
-    <footer>
-        <span class="footer-hearts">💗 💗 💗</span>
-        Made with love, for the girl who became my home.<br>
-        November 15 — Forever
-    </footer>
+  <!-- CHAPTER 7 -->
+  <section id="chapter7">
+    <div class="chapter">
+      <span class="chapter-num">CHAPTER SEVEN ✦ LEBANON — BELARUS</span>
+      <h2 class="chapter-title">The <em>Distance</em></h2>
+      <blockquote class="chapter-quote">"It hurts without you."</blockquote>
+      <p class="chapter-text">I remember the day I left. You watched my flight home. I don't know how to describe what that feels like — to leave someone who has become your home. The distance is real. The ache is real. But so is this love. And distance is just a chapter. Not the whole story.</p>
+    </div>
+    <div class="photo-section fade-in">
+      <div class="photo-grid-2">
+        <div class="photo-item tall"><img src="images/lastday1.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item tall"><img src="images/mpb.jpg.jpeg" alt="" loading="lazy"></div>
+      </div>
+    </div>
+    <div class="video-section fade-in">
+      <div class="video-grid">
+        <div class="video-item"><video controls playsinline><source src="vids/lastday1.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/lastday2.mp3.mp4" type="video/mp4"></video></div>
+      </div>
+    </div>
+  </section>
 
-    <!-- ─── JAVASCRIPT FOR FLOATING HEARTS ─── -->
-    <script>
-        function createHearts() {
-            const container = document.getElementById('hearts');
-            const heartSymbols = ['💗', '💕', '💖', '💘', '💝', '🌸'];
-            for (let i = 0; i < 30; i++) {
-                const heart = document.createElement('span');
-                heart.className = 'heart';
-                heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.fontSize = (Math.random() * 20 + 12) + 'px';
-                heart.style.animationDuration = (Math.random() * 20 + 12) + 's';
-                heart.style.animationDelay = (Math.random() * 20) + 's';
-                container.appendChild(heart);
-            }
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">💗</div><div class="divider-line"></div></div>
+
+  <!-- CHAPTER 8 -->
+  <section id="chapter8">
+    <div class="chapter">
+      <span class="chapter-num">CHAPTER EIGHT ✦ LITTLE THINGS</span>
+      <h2 class="chapter-title">The <em>Surprises</em></h2>
+      <p class="chapter-text">The unexpected flowers. The "I was thinking of you" messages at 2am. The small gifts that meant everything because they said: I see you. I think of you. Even when we're not together, I'm with you. That's how we love. Not in grand gestures — in quiet, consistent, beautiful little things.</p>
+    </div>
+    <div class="photo-section fade-in">
+      <div class="photo-grid-4">
+        <div class="photo-item"><img src="images/sur1.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/sur2.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/sur3.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/sur4.jpg.jpeg" alt="" loading="lazy"></div>
+      </div>
+    </div>
+    <div class="photo-section fade-in">
+      <div class="photo-grid-4">
+        <div class="photo-item"><img src="images/awm1.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/awm2.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/awm3.jpg.jpeg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="images/awm4.jpg.jpeg" alt="" loading="lazy"></div>
+      </div>
+    </div>
+    <div class="video-section fade-in">
+      <div class="video-grid-3">
+        <div class="video-item"><video controls playsinline><source src="vids/sur1.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/sur2.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/sur3.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/sur4.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/sur5.mp3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls playsinline><source src="vids/sur6.mp3.mp4" type="video/mp4"></video></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">💗</div><div class="divider-line"></div></div>
+
+  <!-- CHAPTER 9 -->
+  <section id="chapter9" class="pink-world">
+    <div class="chapter">
+      <span class="chapter-num">CHAPTER NINE ✦ HER WORLD</span>
+      <h2 class="chapter-title">Her <em>Pink World</em></h2>
+      <blockquote class="chapter-quote">"She wants to live in her pink world."</blockquote>
+      <span class="pink-emoji">🌸</span>
+      <p class="chapter-text">Pink sunsets. Pink dreams. Pink everything. And somewhere in that perfectly pink world, there's a pink tractor waiting for its owner. 🚜💗 I don't fully understand it. But I love it — because it's you. Completely, unapologetically, beautifully you. Keep your pink world. I just want to be in it.</p>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">💗</div><div class="divider-line"></div></div>
+
+  <!-- LOVE LETTER -->
+  <section id="letter">
+    <div class="chapter">
+      <span class="chapter-num">CHAPTER TEN ✦ FOR YOU</span>
+      <h2 class="chapter-title">A <em>Letter</em></h2>
+    </div>
+    <div class="love-letter fade-in">
+      <div class="letter-paper">
+        <p class="letter-greeting">My love,</p>
+        <p class="letter-body">I still remember the night I first texted you. November 15, 2025. I don't know what made me do it — maybe it was courage, maybe it was something I can't name. But I'm grateful every single day that I did.</p>
+        <p class="letter-body">The first kiss, just after midnight on November 16th. I didn't sleep that night. I don't think I needed to.</p>
+        <p class="letter-body">December 13th — I asked you to be mine. And when you said yes, something inside me settled. Like I'd been searching for something without knowing it, and then suddenly — there you were.</p>
+        <p class="letter-body">Seven months. Seven months of late nights and early mornings. Of walks that felt like movie scenes. Of cuddling and laughing and being completely, honestly ourselves with each other. I didn't know it could feel this easy. I didn't know love could feel like home.</p>
+        <p class="letter-body">And then I left. I watched Belarus disappear below the clouds and I felt it — that weight in your chest when you leave someone who has become necessary to your life. You watched my flight. I know you did. And I carried that with me all the way to Lebanon.</p>
+        <p class="letter-body">The distance is hard. I won't pretend otherwise. But my love — distance is just a chapter. It is not our story. Our story is still being written, and it is beautiful.</p>
+        <p class="letter-body">Today you turn 18. And I am in Lebanon, wishing I could be there. But I made you this — every photo, every video, every word — because you deserve to feel how loved you are. Even across 3,000 kilometers. Even across time zones. Even from the other side of the world.</p>
+        <p class="letter-body">You are my home. You have been since November 15th. And I'm not going anywhere.</p>
+        <p class="letter-body">Happy birthday, my love. 💗</p>
+        <p class="letter-signature">— Yours, always ❤️<br><em>Hadi</em></p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-icon">💗</div><div class="divider-line"></div></div>
+
+  <!-- FINALE -->
+  <section class="finale">
+    <div class="finale-bg"></div>
+    <div class="finale-content fade-in">
+      <div class="date-tag">JULY 16, 2026</div>
+      <h2 class="finale-title">HAPPY 18TH</h2>
+      <div class="finale-sub">✦ My Love ✦</div>
+      <p class="finale-message">From Lebanon to Belarus — distance can't stop love. You are my home. Today, tomorrow, and always.</p>
+      <div class="finale-love">I love you. 💗</div>
+      <div class="finale-soon">See you soon, my love.</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Made with love, for the girl who became my home. <span class="footer-heart">💗</span></p>
+    <p>November 15 — Forever</p>
+  </footer>
+
+  <script>
+    // CURSOR
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+
+    // HEARTS
+    const container = document.getElementById('hearts');
+    const heartChars = ['💗', '🌸', '💕', '✦', '💓', '🩷'];
+    for (let i = 0; i < 30; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerText = heartChars[Math.floor(Math.random() * heartChars.length)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (Math.random() * 12 + 8) + 'px';
+      heart.style.animationDuration = (Math.random() * 18 + 10) + 's';
+      heart.style.animationDelay = (Math.random() * 12) + 's';
+      container.appendChild(heart);
+    }
+
+    // DAYS TOGETHER (with seconds/minutes)
+    const startDate = new Date('2025-11-15');
+    function updateTogetherTime() {
+      const now = new Date();
+      const diffMs = now - startDate;
+      const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diffMs % (1000 * 60)) / 1000);
+      document.getElementById('daysCount').textContent = days;
+      document.getElementById('countdownBar').textContent =
+        `✦ ${days}D ${hours}H ${minutes}M ${seconds}S TOGETHER ✦`;
+    }
+    updateTogetherTime();
+    setInterval(updateTogetherTime, 1000);
+
+    // MUSIC
+    const audio = document.getElementById('bgMusic');
+    const musicIcon = document.getElementById('musicIcon');
+    const musicWave = document.getElementById('musicWave');
+    let playing = false;
+
+    document.addEventListener('click', function startMusic() {
+      if (!playing) {
+        audio.volume = 0.3;
+        audio.play().then(() => {
+          playing = true;
+          musicIcon.className = 'fas fa-pause';
+        }).catch(() => {});
+      }
+      document.removeEventListener('click', startMusic);
+    }, { once: true });
+
+    function toggleMusic() {
+      if (playing) {
+        audio.pause();
+        playing = false;
+        musicIcon.className = 'fas fa-play';
+        musicWave.classList.add('paused');
+      } else {
+        audio.play();
+        playing = true;
+        musicIcon.className = 'fas fa-pause';
+        musicWave.classList.remove('paused');
+      }
+    }
+
+    // SCROLL ANIMATIONS
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          entry.target.querySelectorAll('.chapter-num, .chapter-title, .chapter-quote, .chapter-text')
+            .forEach(el => el.classList.add('visible'));
         }
-        createHearts();
-    </script>
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in, .chapter').forEach(el => observer.observe(el));
+
+    // NAV HIGHLIGHT
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.story-nav a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 200) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+      });
+    });
+  </script>
 
 </body>
 </html>
